@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.PetMapper">
+	<select id="Animal" resultType="com.human.app.web.Pet.Model.PetModel">
+		select 
+			petName
+		from 
+			tbl_pets
+	</select>
+</mapper>

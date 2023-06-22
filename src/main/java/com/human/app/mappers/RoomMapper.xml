@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.RoomMapper">
+	<select id="selectListRoom" resultType="com.human.app.web.Room.Model.RoomInfoModel"> 
+		select 
+			  roomcode
+			, name  as roomname
+			, type as typename
+			, howmany
+			, howmuch 
+		from room
+	</select>
+	
+	<select id="selectListRoomType" resultType="com.human.app.web.Room.Model.RoomTypeModel">
+		select 
+			typecode
+			, name 
+		from roomtype 
+		order by typecode
+	</select>
+	
+	<update id="UpDateRoom" parameterType="com.human.app.web.Room.Model.RoomInfoModel">
+		update room
+		set 
+			roomcode=#{roomcode}, 
+			roomname=#{name}, 
+			typename=#{type}, 
+			howmany=#{howmany}, 
+			howmuch=#{howmuch}
+		where roomcode=#{roomcode}
+	</update>
+	
+	<delete id="DeleteRoom" parameterType="int">
+		delete 
+		from 
+			room 
+		where 
+			roomcode=#{roomcode}
+	</delete>
+	
+	<insert id="AddRoom" parameterType="com.human.app.web.Room.Model.RoomInfoModel">
+		insert into room 
+		(
+			roomcode
+			, name
+			, type 
+			,howmany 
+			,howmuch 
+		) values (
+			roomcode=#{roomcode}
+			,roomname=#{name}
+			,typename=#{type}
+			,howmany=#{howmany}
+			,howmuch=#{howmuch}
+		)
+	</insert>
+</mapper>

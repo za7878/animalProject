@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.BookMapper">
+	<select id="doFindBooked" parameterType="com.human.app.web.Book.Model.BookedModel" resultType="com.human.app.web.Book.Model.BookedModel">
+		<![CDATA[
+		select 
+			a.roomcode
+			, a.name as roomname
+			, a.type 
+			, a.howmany
+			, a.howmuch
+			, B.name as typename
+		from room a
+		join roomtype B on a.type = B.typecode
+		where 
+		 and a.roomcode not in (
+		            select roomcode
+		            from booking
+		            where
+		            
+		                (checkin >=  #{checkin} and checkin <= #{checkout}) 
+		            or 
+		            	(checkout >= #{checkin} and  checkout <= #{checkout}) 
+		            or 
+		            	(checkin <= #{checkin} and checkout >= #{checkin})  
+		            or 
+		            	(checkin <= #{checkout} and checkout >= #{checkout})
+		)
+		order by a.roomcode
+		]]>
+	</select>
+	
+	<select id="doPickBooking" parameterType="com.human.app.web.Book.Model.GoBookingModel" resultType="Map">
+		select 
+			bookcode,
+		 	roomcode,
+		 	person,
+		   	checkin,
+		  	checkout,
+		    name,
+		    moblie
+		from 
+			booking
+	</select>
+</mapper>

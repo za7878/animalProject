@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.MemberMapper">
+	<select id="selectMemberCount" parameterType="com.human.app.web.Member.Model.ParamListModel" resultType="int">
+		select count(*)
+		from member
+		where loginid = #{userid}
+		<if test="passcode1 != null and passcode1 != '' ">
+			and passcode=#{passcode1}
+		</if> <!-- MyBatis에서도 if조건문 사용 가능. -->
+		<!-- <if> : 단일 조건문 <choose> <when> <otherwise> : 다중 조건문 -->
+
+	</select>
+
+	<insert id="insertMember" parameterType="com.human.app.web.Member.Model.ParamListModel">
+		insert into member (
+		name
+		, loginid
+		, passcode
+		) values (
+		#{name}
+		,#{userid}
+		,#{passcode1}
+		)
+	</insert>
+</mapper>
